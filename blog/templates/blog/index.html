@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block page_title %}Jobil's Blog{% endblock page_title %}
+
+{% block contents %}
+<section id="welcome">
+    <header>
+        <div>
+            <img src="{% static "blog/images/kadhakali.jpg" %}"/>
+            <p>
+                A digital haven where the enchanting world of programming folklore comes alive!
+            </p>
+        </div>
+        <h2>CodeLore</h2>
+    </header>
+</section>
+<section id="popular-posts">
+    <h2 id="h2-posts">Popular Folklores </h2>
+    <section id="latest-posts">
+    {% for post in posts %}
+        {% include "blog/includes/post.html" %}
+    {% endfor %}
+    </section>
+</section>
+<section id="bottom-part">
+    <p>
+        Welcome to CodeLore, a digital heaven where the enchanting world of programming folklore comes alive! I'm Jobil Thomas, your guide through the mystical realms of software development tales, where code meets captivating narratives. 
+    </p>
+    <div id="go-to-posts">
+        <h2><a href="{% url 'posts-page' %}">Go to Posts</a></h2>
+    </div>
+</section>
+{% endblock contents %}

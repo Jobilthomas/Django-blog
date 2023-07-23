@@ -1,0 +1,17 @@
+.all-posts {
+    display: grid;
+    grid-template-columns:auto auto auto;
+    margin: 0rem 14rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.post-excerpt {
+    box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.4);
+    margin: 0.5rem;
+    width: auto;
+}
+
+  

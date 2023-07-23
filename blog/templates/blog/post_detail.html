@@ -1,0 +1,107 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block page_title %}{{post.title | title}}{% endblock page_title %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static "blog/post_detail.css" %}"/>
+{% endblock css_files %}
+
+{% block contents %}
+<section id="post-header">
+    <div id="post-header-left">
+        <h2>{{post.title | title}}</h2>
+        <div id="tag-div">
+            {% for tag in post.tags.all %}
+              <span class="tag">{{ tag.name }}</span>
+            {% endfor %}
+        </div>
+        <form action="{% url "read-later" %}" method="POST" id="read-later">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{post.id}}">
+            <button>
+                {% if saved_for_later %}
+                Remove from "Read Later"
+                {% else %}
+                Read Later
+                {% endif %}
+            </button>
+        </form>
+    </div>
+    <div id="post-header-right">
+        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        <address>By <a href="mailto:{{ post.author.email_address }}">{{ post.author }}</a></address>
+     <div id="time">Last updated on <time>{{ post.date|date:"d M Y" }}</time></div>
+    </div>
+</section>
+<main id="post-content">
+    <p>{{post.content | linebreaks}}</p>
+</main>
+<section id="comment-section">
+    <h2 id="success"></h2>
+    <h1>Comments</h1>
+    <ul id="comment-box">
+    {% for comment in comments  %}
+    <li>
+        <h2>{{ comment.user_name}}</h2>
+        <p>{{ comment.comment }}</p>
+    </li>
+    {% endfor %}
+    </ul>
+    <form action="{% url "post-detail-page" post.slug %}" method="POST" id="form-control">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-field">
+                {{field.label_tag}}
+                {{field}}
+                <div id="{{ field.name }}-error" class="error-message"></div>
+            </div>
+        {% endfor %}
+        <button>Save comment</button>
+    </form>
+    <h2 id="failure"></h2>
+</section>
+<script>
+    $(document).on('submit', '#form-control', function (e) {
+        e.preventDefault();
+        var serializedData = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'post-detail-page' post.slug %}",
+            data: serializedData,
+            success: function(response) {
+                const successComment = document.getElementById('success')
+                successComment.innerHTML = "Your comment is added succesfully"
+                const commentBox = document.getElementById('comment-box')
+                commentBox.innerHTML = `<li><h2>${response.comment_name}</h2>
+                                        <p>${response.comment_text}</p></li>` + commentBox.innerHTML
+                successComment.style.backgroundColor = "rgb(201, 255, 201)"
+                successComment.style.padding = "1rem 4rem"
+                successComment.style.color = "rgb(109, 251, 109)"
+                successComment.style.borderRadius = "1rem"
+                const formBox = document.getElementById('form-control')
+                formBox.innerHTML = `{% csrf_token %}
+                                    {% for field in form %}
+                                    <div class="form-field">
+                                        {{field.label_tag}}
+                                        {{field}}
+                                        <div id="{{ field.name }}-error" class="error-message"></div>
+                                    </div>
+                                    {% endfor %}
+                                    <button>Save comment</button>`
+                $('html, body').animate({
+                    scrollTop: $('#success').offset().top
+                },100);
+            },
+            error: function(response) {
+                var errors = JSON.parse(response.responseJSON.errors);
+                console.log(errors)
+                for (var field in errors) {
+                    console.log(errors[field][0]['message'])
+                    var errorField = $('#' + field + '-error')
+                    errorField.html(errors[field][0]['message']).join('<br>')
+                }
+            }
+        })
+    })
+</script>
+{% endblock contents %}

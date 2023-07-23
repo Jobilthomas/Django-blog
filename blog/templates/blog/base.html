@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}{% endblock page_title %}</title>
+    <link rel="stylesheet" href="{% static "blog/style.css" %}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {% block css_files %}{% endblock css_files %}
+</head>
+<body>
+    <header id="main-navigation">
+        <h1><a href="{% url "starting-page" %}">Jobil's Blog</a></h1>
+        <nav>
+            <a href="{% url "posts-page" %}">All Posts</a>
+            <a href="{% url "read-later" %}">Stored Posts</a>
+        </nav>
+    </header>
+    {% block contents %}{% endblock contents %}
+</body>
+</html>

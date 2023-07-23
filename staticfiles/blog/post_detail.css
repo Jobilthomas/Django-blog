@@ -1,0 +1,134 @@
+#post-header {
+  display: flex;
+  background-color: rgb(11, 40, 154);
+  margin: 2rem 5rem;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.4);
+  padding: 1.5rem 2rem;
+  color: white;
+}
+
+#post-header-right {
+  margin-inline-start: auto;
+  padding: 2rem 7rem;
+}
+
+#post-header-right img {
+  width: 15rem;
+  height: 15rem;
+  border: 5px solid white;
+  border-radius: 12px;
+  transform: rotateZ(5deg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+#post-header-right a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#post-header-right a:hover,
+#post-header-right a:active {
+  color: rgb(127, 245, 245);
+}
+
+#post-header-left h2 {
+  font-size: 4rem;
+}
+
+#tag-div {
+  margin-top: -2rem;
+}
+
+.tag {
+  padding: 0.5rem;
+  color: rgb(11, 40, 154);
+  background-color: white;
+  border-radius: 1rem;
+  font-weight: bold;
+}
+
+#read-later {
+  margin-top: 2rem;
+}
+
+#read-later button {
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 0.5rem 0.5rem;
+  font: inherit;
+  color: white;
+  cursor: pointer;
+}
+
+#read-later button:hover,
+#read-later button:active {
+  border: 1px solid rgb(127, 245, 245);
+  color: rgb(127, 245, 245);
+}
+
+#post-content {
+  padding: 1rem 20rem;
+  font-size: 1.25rem;
+}
+
+#comment-section {
+  background-color: rgb(232, 230, 230);
+  border-radius: 1rem;
+  margin: 0rem 5rem;
+}
+
+#comment-section h1 {
+  padding: 1rem 4rem;
+  border-bottom: 1px solid rgb(104, 103, 103);
+  border-radius: 1rem;
+}
+
+#comment-box {
+  list-style: none;
+  padding: 0rem 1rem 0rem 4rem;
+}
+
+#comment-box h2 {
+  font-size: 1rem;
+}
+
+#comment-box p {
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgb(191, 189, 189);
+}
+
+#form-control {
+  margin: auto;
+  width: 50%;
+  padding: 2rem 5rem 3rem 5rem;
+}
+
+.form-field {
+  display: grid;
+}
+
+.form-field input,
+.form-field textarea {
+  background-color: transparent;
+  border: 1px solid rgb(104, 103, 103);
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  margin: 0.3rem 0rem;
+}
+
+#form-control button {
+  font: inherit;
+  background-color: #390281;
+  color: white;
+  border: 1px solid #390281;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#form-control button:hover,
+#form-control button:active {
+  color: rgb(127, 245, 245);
+}
